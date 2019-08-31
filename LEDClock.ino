@@ -73,11 +73,11 @@ void setup () {
   do{
     for (i = 0; i < msLED.numPixels(); i++)
     {
-      lsrColors = msLED.ColorHSV(i * 65536 / msLED.numPixels(), 255, 30);
+      msColors = msLED.ColorHSV(i * 65536 / msLED.numPixels(), 255, 30);
       //msLED.setPixelColor(i, lsrColors);
-      msColorR[i] = (lsrColors >> 16 & 0xFF);
-      msColorG[i] = (lsrColors >> 8 & 0xFF);
-      msColorB[i] = (lsrColors & 0xFF);
+      msColorR[i] = (msColors >> 16 & 0xFF);
+      msColorG[i] = (msColors >> 8 & 0xFF);
+      msColorB[i] = (msColors & 0xFF);
     }
     x++;
   } while (x < msLED.numPixels());
@@ -157,9 +157,6 @@ Serial.print(now.year(), DEC);
 */  
 
 
-  
- 
-
 // if(now.second() == 0){  msLED.clear();   }
 
   
@@ -170,17 +167,26 @@ if(now.minute() > now.second() && now.second() != 0){
   
   msLED.clear();
 
+/*
+  y++;
+  if (y >= msLED.numPixels() ){
+    y = 0;
+  }
+  */
+
   x = 0;
   do
   {
     for (i = 0; i < now.minute() ; i++)
     {
-      msLED.setPixelColor(i, msColorR[i], msColorG[i], msColorB[i]);
+      msLED.setPixelColor(i , msColorR[i], msColorG[i], msColorB[i]);
     }
     x++;
   } while (x < (now.minute() ));
-
+  
+  if(now.second() != 1){
   msLED.fill(clearColor, 0, now.second()-1 );
+  }
 }
 
 if(now.minute() == now.second() ){

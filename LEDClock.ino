@@ -3,18 +3,18 @@
 #include <Adafruit_NeoPixel.h>
 
 // LED Pins - Der Pin am Arduino vom dem das Daten Signal rausgeht
-#define msLED_PIN     2  
-#define hLED_PIN      3  
-#define dLED_PIN      4  
-#define wdLED_PIN     5  
-#define mLED_PIN      6              
+#define msLED_PIN     6  
+#define hLED_PIN      4  
+#define dLED_PIN      3  
+#define wdLED_PIN     2  
+#define mLED_PIN      5              
 
 // LED COUNT - Anzahl an LEDs im Ring oder Strip
 #define msLED_COUNT   60 
 #define hLED_COUNT    12 
-#define dLED_COUNT    12 
-#define wdLED_COUNT   7 
-#define mLED_COUNT    10           
+#define dLED_COUNT    31 
+#define wdLED_COUNT   7
+#define mLED_COUNT    12          
  
 // Declare NeoPixel objects:
 Adafruit_NeoPixel hLED(hLED_COUNT, hLED_PIN, NEO_GRB + NEO_KHZ800);
@@ -65,9 +65,25 @@ char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursd
 
 void setup () {
 
+  hLED.begin();
+  hLED.setBrightness(20);
+  hLED.show();  
+
   msLED.begin();
   msLED.setBrightness(20);
   msLED.show();  
+
+  dLED.begin();
+  dLED.setBrightness(20);
+  dLED.show();  
+
+  wdLED.begin();
+  wdLED.setBrightness(20);
+  wdLED.show();  
+
+  mLED.begin();
+  mLED.setBrightness(20);
+  mLED.show();  
 
   // Fabre definieren: hue Spektrum (Rainbow)
   do{
@@ -202,16 +218,83 @@ if(now.second() == 0){
     msLED.setPixelColor(msLED.numPixels()-1, msColorR[now.second()], msColorG[now.second()], msColorB[now.second()]);  
 }    
   
+
 msLED.show();
 
 
 // Set LED for Hours
+  hLED.clear();
+  if(now.hour() % 12 == 0){hLED.setPixelColor(11 , msColorR[i], msColorG[i], msColorB[i]);};
+  x = 0;
+  do
+  {
+    for (i = 0; i < (now.hour() % 12) ; i++)
+    {
+      hLED.setPixelColor(i , msColorR[i], msColorG[i], msColorB[i]);
+    }
+    x++;
+  } while (x < (now.hour() % 12 ));
 
+  hLED.show();
+
+
+
+// Set LED for Weekdays - now.dayOfTheWeek()
+  wdLED.clear();
+  //if(now.day() % 12 == 0){hLED.setPixelColor(11 , msColorR[i], msColorG[i], msColorB[i]);};
+  x = 0;
+  do
+  {
+    for (i = 0; i < now.dayOfTheWeek() ; i++)
+    {
+      wdLED.setPixelColor(i , msColorR[i], msColorG[i], msColorB[i]);
+    }
+    x++;
+  } while (x < now.dayOfTheWeek());
+  wdLED.show();
+
+
+
+  
 // Set LED for Days
+  dLED.clear();
+  //if(now.day() % 12 == 0){hLED.setPixelColor(11 , msColorR[i], msColorG[i], msColorB[i]);};
+  x = 0;
+  do
+  {
+    for (i = 0; i < (now.day() % 10) ; i++)
+    {
+      dLED.setPixelColor(i , 0, 0, 30);
+    }
+    x++;
+  } while (x < (now.day() % 10 ));
 
-// Set LED for Workdays
+  dLED.show();
+
+
+
+
 
 // Set LED for Month
+  mLED.clear();
+  //if(now.day() % 12 == 0){hLED.setPixelColor(11 , msColorR[i], msColorG[i], msColorB[i]);};
+  x = 0;
+  do
+  {
+    for (i = 0; i < (now.month() % 10) ; i++)
+    {
+      mLED.setPixelColor(i , 0, 30, 0);
+    }
+    x++;
+  } while (x < (now.month() % 10 ));
+
+  mLED.show();
+  mLED.show();
+
+
+
+
+
 
 
 

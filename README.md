@@ -10,7 +10,6 @@ Bau einer Uhr mit LED und einem Arduino.
 - <a href="https://www.amazon.de/gp/product/B07TPSB35N/">LED Strip (Abschnitte abgeschnitten und neu verbunden)</a>
 - <a href="https://www.ebay.de/itm/10-Stck-127-Werte-Ohm-Sortiment-1-Ohm-1-MOhm-Widerstand-Metallfilm-Widerstände/142446356352">470 Ohm Widerstand für LED</a>
 - <a href="https://www.amazon.de/gp/product/B00IJWQ7P8/">LIR-2032 Knopfzelle für den DS3231</a>
-- <a href="">LED</a>
 - Sonstiges (nach Bedarf): Stromversorgung (bspw. kleine Powerbank), Kabel, Klebeband, An-/Ausknopf
 
 ### Verbindung zwischen Arduino und RTC
